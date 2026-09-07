@@ -3,9 +3,19 @@ import "dotenv/config";
 import connectDb from "./config/db.js";
 
 
-const app = express();
 await connectDb();
 
+const app = express();
+
+//middlewares
+app.use(express.json());
+
+//import routes
+import userRouter from "./routes/user.js";
+
+
+// using routes
+app.use('/api/v1', userRouter)
 
 const PORT = process.env.PORT
 app.listen(PORT, () => {
